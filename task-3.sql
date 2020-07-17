@@ -1,7 +1,7 @@
-SELECT products.product_name, SUM(order_details.product_id) AS sum
-FROM products
-INNER JOIN order_details
-ON products.product_id = order_details.product_id
+SELECT products.product_name, TO_CHAR(SUM(order_details.quantity * order_details.unit_price), '9999999999') AS sum
+FROM order_details
+INNER JOIN products
+ON order_details.product_id = products.product_id
 GROUP BY products.product_name
 ORDER BY sum
 LIMIT 10;
